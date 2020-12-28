@@ -1,19 +1,24 @@
 <template>
     <div class="outline_cal">
         <p class="result">{{calulation}}</p>
+
        <div class="numbers">
         <button @click="pressed('1')">1</button>
         <button @click="pressed('2')">2</button>
         <button @click="pressed('3')">3</button>
+        <button @click="pressed('+')">+</button>
         <button @click="pressed('4')">4</button>
         <button @click="pressed('5')">5</button>
         <button @click="pressed('6')">6</button>
+          <button @click="pressed('-')">-</button>
         <button @click="pressed('7')">7</button>
         <button @click="pressed('8')">8</button>
         <button @click="pressed('9')">9</button>
+        <button @click="pressed('*')">*</button>
         <button @click="pressed('0')">0</button>
+         <button @click="pressed('c')">CLR</button>
         <button @click="pressed('=')">=</button>
-        <button @click="pressed('clear')">CAL</button>
+       <button @click="pressed('/')">/</button>
         </div>
     </div>
 </template>
@@ -23,23 +28,57 @@ export default {
     setup(){
 const calulation = ref('');
 const operations = ['+','-', '/', '*'];
+// const CurrentNumber = ref("");
+const prevNumb = ref("");
+const seectedOpeartion = ref("");
+
 function pressed(value){
-    if (value === '=') cal(value);
+    if (value === '=') cal();
+    if (value === 'c') cleare();
     else if(operations.includes(value)) applyOperation(value);
     else appendNumbber(value);
-    calulation.value = calulation.value+ value
+   
 }
+function cleare(){
+    calulation.value = "";
+}
+
 function appendNumbber(value){
-   calulation.value = calulation.value+ value  
+ calulation.value = calulation.value+ value;
 
 }
 function applyOperation(value){
-return value;
+    prevNumb.value = calulation.value ;
+    calulation.value = ""; 
+    seectedOpeartion.value = value;
+
+
+
 }
-function cal(value){
-    return value;
+function cal(){
+    if (seectedOpeartion.value === '*') multiply();
+    else if (seectedOpeartion.value === '-') subract();
+    else if (seectedOpeartion.value === '+') add();
+    else if (seectedOpeartion.value === '/') divide();
+   
+
+    
+
     
 }
+function multiply(){
+    calulation.value = +prevNumb.value * +calulation.value ; 
+}
+function subract(){
+    calulation.value = +prevNumb.value - +calulation.value ; 
+}
+function add(){
+    calulation.value = +prevNumb.value + +calulation.value ; 
+}
+function divide(){
+    calulation.value = +prevNumb.value / +calulation.value ; 
+}
+
 return {calulation, pressed}; 
     }
 }
@@ -70,6 +109,7 @@ return {calulation, pressed};
 }
 .numbers > button:hover{
     background-color: gray;
+    color: white;
     
 
 }
