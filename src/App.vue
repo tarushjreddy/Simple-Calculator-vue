@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div>
+<AppHeader />
+<div class="Orient">
+<Calculator/>
+</div>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+
+import AppHeader from './App_header.vue';
+import Calculator from './calculator.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    AppHeader,
+    Calculator
   }
+  
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+  margin: 0px;
 }
+.Orient{
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
 </style>
